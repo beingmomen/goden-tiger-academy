@@ -10,6 +10,8 @@ router
   .post(
     authController.protect,
     authController.restrictTo('admin'),
+    beltController.uploadBeltImages,
+    beltController.resizeBeltImages,
     beltController.createBelt
   );
 
@@ -19,7 +21,9 @@ router
   .patch(
     authController.protect,
     authController.restrictTo('admin'),
-    beltController.updateBelt
+    beltController.uploadBeltImages,
+    beltController.resizeBeltImages,
+    beltController.updateBelt  
   )
   .delete(
     authController.protect,

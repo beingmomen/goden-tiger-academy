@@ -17,7 +17,7 @@ const schema = new mongoose.Schema(
     },
     startDate: {
       type: Date,
-      required: [true, 'Please tell us start date!']
+      required: [true, 'Please tell us start date!'] 
     },
     createdAt: {
       type: Date,
@@ -89,11 +89,11 @@ schema.pre(/^find/, function(next) {
   this.populate({
     path: 'activity',
     select: 'name image'
+  })
+  .populate({
+    path: 'lastBelt.belt',
+    select: 'name'
   });
-  // .populate({
-  //   path: 'belts.belt',
-  //   select: 'name'
-  // });
   next();
 });
 

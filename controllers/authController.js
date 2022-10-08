@@ -12,7 +12,7 @@ const signToken = id => {
   });
 };
 
-const createSendToken = (user, statusCode, res, status='success') => {
+const createSendToken = (user, statusCode, res, status = 'success') => {
   const token = signToken(user._id);
   const cookieOptions = {
     expires: new Date(
@@ -53,7 +53,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 });
 
 exports.login = catchAsync(async (req, res, next) => {
-  console.log("req", req.body)
+  // console.log("req", req.body)
   const { email, password } = req.body;
 
   // 1) Check if email and password exist
@@ -72,8 +72,8 @@ exports.login = catchAsync(async (req, res, next) => {
 });
 
 exports.logout = catchAsync(async (req, res, next) => {
-  console.log("logout")
-  next()
+  console.log('logout');
+  next();
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -146,8 +146,10 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   // 3) Send it to user's email
   try {
-    const resetURL = `${req.protocol}://${process.env.RESET_PASSWORD_URL}/${resetToken}`;
-    await new Email(user, resetURL).sendPasswordReset(); 
+    const resetURL = `${req.protocol}://${
+      process.env.RESET_PASSWORD_URL
+    }/${resetToken}`;
+    await new Email(user, resetURL).sendPasswordReset();
 
     res.status(200).json({
       status: 'success',

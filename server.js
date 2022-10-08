@@ -26,9 +26,20 @@ mongoose
   })
   .then(() => console.log('DB connection successful!'));
 
-const port = process.env.PORT || 1234;
-const server = app.listen(port, () => {
-  console.log(`App running on port ${port}...`);
+// const port = process.env.PORT || 1234;
+// const server = app.listen(port, () => {
+//   console.log(`App running on port ${port}...`);
+// });
+
+const server = null;
+
+server.listen(1234, '0.0.0.0');
+server.on('listening', function() {
+  console.log(
+    'Express server started on port %s at %s',
+    server.address().port,
+    server.address().address
+  );
 });
 
 process.on('unhandledRejection', err => {

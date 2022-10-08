@@ -21,6 +21,10 @@ const playerRouter = require('./routes/playerRoutes');
 
 const app = express();
 
+// Serving static files
+app.use(express.static(`${__dirname}/public`));
+// app.use('/images', express.static('images'));
+
 app.use(cors()); // use this cors in middleware and done
 
 // 1) GLOBAL MIDDLEWARE
@@ -66,10 +70,6 @@ app.use(
 );
 
 app.use(compression());
-
-// Serving static files
-app.use(express.static(`${__dirname}/public`));
-app.use('/images', express.static('images'));
 
 // Test middleware
 app.use((req, res, next) => {

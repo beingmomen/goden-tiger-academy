@@ -27,7 +27,7 @@ module.exports = class Email {
     );
     oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
     const accessToken = oAuth2Client.getAccessToken();
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'production') {
       // Sendgrid
       return nodemailer.createTransport({
         service: 'gmail',

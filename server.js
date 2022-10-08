@@ -11,7 +11,7 @@ dotenv.config({ path: './config.env' });
 const app = require('./app');
 
 // const DB = process.env.DATABASE_LOCAL;
-const DB = process.env.DATABASE_LOCAL;
+const DB = process.env.DATABASE;
 
 // const DB = process.env.DATABASE.replace(
 //   '<PASSWORD>',

@@ -8,7 +8,7 @@ process.on('uncaughtException', err => {
 });
 
 dotenv.config({ path: './config.env' });
-// const app = require('./app');
+const app = require('./app');
 
 // const DB = process.env.DATABASE_LOCAL;
 const DB = process.env.DATABASE;
@@ -31,7 +31,7 @@ mongoose
 //   console.log(`App running on port ${port}...`);
 // });
 
-const server = null;
+const server = app();
 
 server.listen(1234, '0.0.0.0');
 server.on('listening', function() {

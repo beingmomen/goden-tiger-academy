@@ -20,8 +20,7 @@ const createSendToken = (user, statusCode, res, status = 'success') => {
     ),
     httpOnly: true
   };
-  // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
-  if (process.env.NODE_ENV === 'development') cookieOptions.secure = true;
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
   res.cookie('jwt', token, cookieOptions);
 

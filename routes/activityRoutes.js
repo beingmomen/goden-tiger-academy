@@ -2,10 +2,12 @@ const express = require('express');
 const activityController = require('../controllers/activityController');
 const authController = require('../controllers/authController');
 const championshipRouter = require('./../routes/championshipRoutes');
+const beltRouter = require('./../routes/beltRoutes');
 
 const router = express.Router();
 
 router.use('/:activityId/championships', championshipRouter);
+router.use('/:allActivityId/belts', beltRouter);
 
 router
   .route('/')

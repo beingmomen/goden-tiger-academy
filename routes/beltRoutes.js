@@ -2,7 +2,7 @@ const express = require('express');
 const beltController = require('../controllers/beltController');
 const authController = require('../controllers/authController');
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 router
   .route('/')
@@ -23,7 +23,7 @@ router
     authController.restrictTo('admin'),
     beltController.uploadBeltImages,
     beltController.resizeBeltImages,
-    beltController.updateBelt  
+    beltController.updateBelt
   )
   .delete(
     authController.protect,

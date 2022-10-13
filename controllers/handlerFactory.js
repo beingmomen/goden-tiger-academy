@@ -72,6 +72,8 @@ exports.getAll = Model =>
     // console.warn('search', req.query);
     let filter = {};
     if (req.params.activityId) filter = { activity: req.params.activityId };
+    if (req.params.allActivityId)
+      filter = { activities: req.params.allActivityId };
 
     const total = await new APIFeatures(Model.find(filter), req.query)
       .filter()

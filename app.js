@@ -23,7 +23,7 @@ const app = express();
 
 // Serving static files
 app.use(express.static(`${__dirname}/public`));
-// app.use('/images', express.static('images'));
+app.use('/images', express.static('images'));
 
 app.use(cors()); // use this cors in middleware and done
 
@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // Limit requests from same API
 const limiter = rateLimit({
-  max: 100,
+  max: 1000,
   windowMs: 60 * 60 * 1000,
   message: {
     errors: ['Too many requests from this IP, please try again in an hour!']

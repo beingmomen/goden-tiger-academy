@@ -26,7 +26,7 @@ console.warn('db', DB);
 
 mongoose
   .connect(DB, {
-    useNewUrlParser: false,
+    useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false
   })

@@ -12,17 +12,21 @@ process.on('uncaughtException', err => {
 dotenv.config({ path: './config.env' });
 const app = require('./app');
 
-const DB = process.env.DATABASE_LOCAL;
+// const DB =
+//   'mongodb+srv://academy:9aJngWYk6rYaIMO0@academy.wvr8vfi.mongodb.net/?retryWrites=true&w=majority';
+// const DB = process.env.DATABASE_LOCAL;
 // const DB = process.env.DATABASE;
 
-// const DB = process.env.DATABASE_LOCAL.replace(
-//   '<PASSWORD>',
-//   process.env.DATABASE_PASSWORD_LOCAL
-// );
+const DB = process.env.DATABASE.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
+).toString();
+
+console.warn('db', DB);
 
 mongoose
   .connect(DB, {
-    useNewUrlParser: true,
+    useNewUrlParser: false,
     useCreateIndex: true,
     useFindAndModify: false
   })

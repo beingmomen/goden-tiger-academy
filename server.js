@@ -1,5 +1,7 @@
+const fs = require('fs');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const User = require('./models/userModel');
 
 process.on('uncaughtException', err => {
   console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
@@ -38,3 +40,22 @@ process.on('unhandledRejection', err => {
     process.exit(1);
   });
 });
+
+const users = JSON.parse(
+  fs.readFileSync(`${__dirname}/data/user.json`, 'utf-8')
+);
+
+// IMPORT DATA INTO DB
+const importData = async () => {
+  try {
+    const exist = await User.findById('6349c2b12fb7e853843667d8');
+    if (exist) return;
+    await User.create(users);
+    console.log('Data successfully loaded!');
+  } catch (err) {
+    console.log(err);
+  }
+  process.exit();
+};
+
+importData();

@@ -44,6 +44,11 @@ const sendErrorDev = (err, res) => {
     errorsArr.error = [
       ' Mail cannot be sent The from address does not match a verified Sender Identity'
     ];
+  } else if (
+    err.message.startWith('/images') &&
+    err.message.includes('.jpeg')
+  ) {
+    errorsArr.error = ['Can’t find Image'];
   } else {
     if (!err.isHandled) {
       // eslint-disable-next-line no-restricted-syntax

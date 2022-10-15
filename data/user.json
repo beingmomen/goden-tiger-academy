@@ -1,0 +1,12 @@
+[
+    {
+        "_id": "6349c2b12fb7e853843667d8",
+        "name": "Tech Care",
+        "email": "admin@techcare.com",
+        "role": "admin",
+        "active": true,
+        "photo": "default.jpg",
+        "password": "$2a$12$6Qdd1l/3Xe.ylobyh1gxJe3KHZwXwLPrUF5IZ2Pgnvjr5fb0XD1.C",
+        "passwordConfirm": "$2a$12$6Qdd1l/3Xe.ylobyh1gxJe3KHZwXwLPrUF5IZ2Pgnvjr5fb0XD1.C"
+    }
+]

@@ -22,6 +22,14 @@ const schema = new mongoose.Schema({
     type: String,
     default: 'default.jpg'
   },
+  country: {
+    type: String,
+    required: [true, 'Please confirm your country']
+  },
+  phone: {
+    type: String,
+    required: [true, 'Please confirm your phone number']
+  },
   role: {
     type: String,
     enum: ['user', 'moderator', 'admin'],
@@ -50,7 +58,7 @@ const schema = new mongoose.Schema({
   active: {
     type: Boolean,
     default: true,
-    select: false
+    select: true
   }
 });
 

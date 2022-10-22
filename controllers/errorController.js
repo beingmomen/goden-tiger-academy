@@ -44,11 +44,6 @@ const sendErrorDev = (err, res) => {
     errorsArr.error = [
       ' Mail cannot be sent The from address does not match a verified Sender Identity'
     ];
-  } else if (
-    err.message.startWith('/images') &&
-    err.message.includes('.jpeg')
-  ) {
-    errorsArr.error = ['Can’t find Image'];
   } else {
     if (!err.isHandled) {
       // eslint-disable-next-line no-restricted-syntax
@@ -70,6 +65,13 @@ const sendErrorDev = (err, res) => {
     // stack: err.stack
   });
 };
+
+// else if (
+//   err.message.startWith('/images') &&
+//   err.message.includes('.jpeg')
+// ) {
+//   errorsArr.error = ['Can’t find Image'];
+// }
 
 // const sendErrorProd = (err, res) => {
 //   // Operational, trusted error: send message to client

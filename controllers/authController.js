@@ -63,6 +63,8 @@ exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
     name: req.body.name,
     email: req.body.email,
+    country: req.body.country,
+    phone: req.body.phone,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm
   });
@@ -78,6 +80,8 @@ exports.admin = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
     name: req.body.name,
     email: req.body.email,
+    country: req.body.country,
+    phone: req.body.phone,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
     role: 'admin'

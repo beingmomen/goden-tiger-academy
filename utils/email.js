@@ -5,50 +5,49 @@ const pug = require('pug');
 const htmlToText = require('html-to-text');
 
 module.exports = class Email {
-  constructor(user, url) {
+  constructor(user, url, website, manager) {
     this.to = user.email;
     this.firstName = user.name.split(' ')[0];
     this.url = url;
-    this.from = `the website <${process.env.EMAIL_FROM}>`;
+    this.from = `${process.env.SITE_NAME} <${process.env.EMAIL_FROM}>`;
+    this.website = website;
+    this.manager = manager;
   }
 
   newTransport() {
-    const CLIENT_ID =
-      '1008215457370-huolfk2hdgm8cfdj3oruaqs9d4c6rsf7.apps.googleusercontent.com';
-    const CLEINT_SECRET = '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';
-    const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
-    const REFRESH_TOKEN =
-      '1//04B25Gv9y_ObICgYIARAAGAQSNwF-L9Ir3UJ_BLyNk0XjcndwdgRxz8fIobGkfQMIXOzX7-hgtTqeVxTY7MzlMEe5E1IsSwe8Qec';
-
     const oAuth2Client = new google.auth.OAuth2(
-      CLIENT_ID,
-      CLEINT_SECRET,
-      REDIRECT_URI
+      process.env.GMAIL_ID,
+      process.env.GMAIL_KEY,
+      process.env.GMAIL_REDIRECT_URL
     );
-    oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+
+    oAuth2Client.setCredentials({
+      refresh_token: process.env.GMAIL_REFRESH_TOKEN
+    });
+
     const accessToken = oAuth2Client.getAccessToken();
+
     if (process.env.NODE_ENV === 'production') {
-      // Sendgrid
       return nodemailer.createTransport({
         service: 'gmail',
         auth: {
           type: 'OAuth2',
           user: 'abdelmomenelshatory@gmail.com',
-          clientId: CLIENT_ID,
-          clientSecret: CLEINT_SECRET,
-          refreshToken: REFRESH_TOKEN,
+          clientId: process.env.GMAIL_ID,
+          clientSecret: process.env.GMAIL_KEY,
+          refreshToken: process.env.GMAIL_REFRESH_TOKEN,
           accessToken: accessToken
         }
       });
     }
 
     return nodemailer.createTransport({
-      host: process.env.EMAIL_HOST,
-      port: process.env.EMAIL_PORT,
+      host: process.env.MAILTRAP_HOST,
+      port: process.env.MAILTRAP_PORT,
       secure: false, // true for 465, false for other ports
       auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD
+        user: process.env.MAILTRAP_USERNAME,
+        pass: process.env.MAILTRAP_PASSWORD
       }
     });
   }
@@ -59,6 +58,8 @@ module.exports = class Email {
     const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`, {
       firstName: this.firstName,
       url: this.url,
+      website: this.website,
+      manager: this.manager,
       subject
     });
 
@@ -76,7 +77,7 @@ module.exports = class Email {
   }
 
   async sendWelcome() {
-    await this.send('welcome', 'Welcome to the Website test Family!');
+    await this.send('welcome', `مرحبا بك فى عائلة ${process.env.SITE_NAME}`);
   }
 
   async sendPasswordReset() {

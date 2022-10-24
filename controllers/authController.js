@@ -70,8 +70,9 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
 
   const url = `${req.protocol}://${req.get('host')}/me`;
-  console.log('url', url);
-  await new Email(newUser, url).sendWelcome();
+  const website = process.env.SITE_NAME;
+  const manager = process.env.MANAGER;
+  await new Email(newUser, url, website, manager).sendWelcome();
 
   createSendToken(newUser, 201, res);
 });
@@ -185,7 +186,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 3) Send it to user's email
   try {
     const resetURL = `${req.protocol}://${
-      process.env.RESET_PASSWORD_URL
+      process.env.RESET_PASSWORD_URL_DEV
     }/${resetToken}`;
     await new Email(user, resetURL).sendPasswordReset();
 

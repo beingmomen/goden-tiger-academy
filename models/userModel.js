@@ -24,11 +24,11 @@ const schema = new mongoose.Schema({
   },
   country: {
     type: String,
-    required: [true, 'Please confirm your country']
+    required: [false, 'Please confirm your country']
   },
   phone: {
     type: String,
-    required: [true, 'Please confirm your phone number']
+    required: [false, 'Please confirm your phone number']
   },
   role: {
     type: String,

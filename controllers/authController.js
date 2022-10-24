@@ -1,10 +1,15 @@
 const crypto = require('crypto');
 const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
+// const emailValidator = require('deep-email-validator');
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const Email = require('./../utils/email');
+
+// async function isEmailValid(email) {
+//   return emailValidator.validate(email);
+// }
 
 const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -60,6 +65,15 @@ const createSendTokenNo = (user, statusCode, res, status = 'success') => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
+  // const { valid, reason, validators } = await isEmailValid(req.body.email);
+
+  // console.warn(
+  //   '***************************************************************************************'
+  // );
+  // if (valid) return console.warn('valid email');
+
+  // console.warn('reason', validators[reason].reason);
+
   const newUser = await User.create({
     name: req.body.name,
     email: req.body.email,
